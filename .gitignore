@@ -1,69 +1,118 @@
+# Ruby and Rails specific files
 *.rbc
 capybara-*.html
 .rspec
-/db/*.sqlite3
-/db/*.sqlite3-journal
-/db/*.sqlite3-[0-9]*
-/public/system
-/coverage/
-/spec/tmp
 *.orig
 rerun.txt
 pickle-email-*.html
 
-# Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
+# Database files
+src/db/*.sqlite3
+src/db/*.sqlite3-journal
+src/db/*.sqlite3-[0-9]*
 
-# TODO Comment out this rule if you are OK with secrets being uploaded to the repo
-config/initializers/secret_token.rb
-config/master.key
+# Public system files
+src/public/system
+src/public/uploads
+
+# Coverage reports
+src/coverage/
+src/spec/tmp
+
+# Ignore all logfiles and tempfiles
+src/log/*
+src/tmp/*
+!src/log/.keep
+!src/tmp/.keep
+
+# Rails secrets and configuration
+src/config/initializers/secret_token.rb
+src/config/master.key
+src/config/credentials.yml.enc
 
 # Only include if you have production secrets in this file, which is no longer a Rails default
-# config/secrets.yml
+# src/config/secrets.yml
 
-# dotenv, dotenv-rails
+# Environment variables
 # TODO Comment out these rules if environment variables can be committed
 .env
 .env*.local
+src/.env
+src/.env*.local
 
-## Environment normalization:
-/.bundle
-/vendor/bundle
+# Bundle configuration
+src/.bundle
+src/vendor/bundle
 
+# Ruby version managers
 # these should all be checked in to normalize the environment:
 # Gemfile.lock, .ruby-version, .ruby-gemset
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
-# if using bower-rails ignore default bower_components path bower.json files
-/vendor/assets/bower_components
+# Bower components (if using bower-rails)
+src/vendor/assets/bower_components
 *.bowerrc
 bower.json
 
-# Ignore pow environment settings
+# Pow environment settings
 .powenv
 
-# Ignore Byebug command history file.
+# Byebug command history file
 .byebug_history
 
-# Ignore node_modules
+# Node.js dependencies
 node_modules/
+src/node_modules/
 
-# Ignore precompiled javascript packs
-/public/packs
-/public/packs-test
-/public/assets
+# Precompiled assets
+src/public/packs
+src/public/packs-test
+src/public/assets
 
-# Ignore yarn files
-/yarn-error.log
-yarn-debug.log*
-.yarn-integrity
+# Yarn files
+src/yarn-error.log
+src/yarn-debug.log*
+src/.yarn-integrity
 
-# Ignore uploaded files in development
-/storage/*
-!/storage/.keep
-/public/uploads
+# Storage files
+src/storage/*
+!src/storage/.keep
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Deployment and build files
+.vercel
+dist/
+build/
+
+# Docker files (optional)
+# Dockerfile
+# docker-compose.yml
+
+# Test coverage
+src/coverage/
+
+# Rails cache
+src/tmp/cache/
+
+# PID files
+src/tmp/pids/
+
+# Restart file
+src/tmp/restart.txt
