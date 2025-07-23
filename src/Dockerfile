@@ -60,7 +60,7 @@ RUN mkdir -p tmp/pids log storage && \
     chmod +x bin/setup
 
 # Expose port for development
-EXPOSE 80
+EXPOSE 3001
 
 # Entrypoint prepares the database
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
@@ -127,5 +127,5 @@ USER 1000:1000
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start server via Thruster by default for production
-EXPOSE 80
+EXPOSE 3001
 CMD ["./bin/thrust", "./bin/rails", "server"]

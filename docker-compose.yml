@@ -42,7 +42,7 @@ services:
       - rails_cache:/rails/tmp/cache
       - rails_storage:/rails/storage
     ports:
-      - "3001:80"
+      - "3001:3001"
     depends_on:
       db:
         condition: service_healthy
@@ -54,7 +54,7 @@ services:
       bash -c "
         bundle install &&
         bundle exec rails db:create db:migrate db:seed &&
-        bundle exec rails server -b 0.0.0.0 -p 80
+        bundle exec rails server -b 0.0.0.0 -p 3001
       "
 
   # Nginx (reverse proxy for production)
