@@ -54,7 +54,10 @@ COPY . .
 
 # Create directories and set permissions
 RUN mkdir -p tmp/pids log storage && \
-    chmod +x bin/docker-entrypoint
+    chmod +x bin/docker-entrypoint && \
+    chmod +x bin/rails && \
+    chmod +x bin/rake && \
+    chmod +x bin/setup
 
 # Expose port for development
 EXPOSE 3000
@@ -112,7 +115,11 @@ RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     mkdir -p tmp/pids log storage && \
     chown -R rails:rails db log storage tmp && \
-    chmod +x bin/docker-entrypoint
+    chmod +x bin/docker-entrypoint && \
+    chmod +x bin/rails && \
+    chmod +x bin/rake && \
+    chmod +x bin/setup && \
+    chmod +x bin/thrust
 
 USER 1000:1000
 
