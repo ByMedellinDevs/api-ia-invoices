@@ -24,7 +24,7 @@ module Api
     end
 
     def create
-      result = Transaction::Operation::Create.call(params: transaction_params)
+      result = Transaction::Operation::Create.call(params: transaction_params.to_h)
       
       if result.success?
         render json: result[:serialized_data], status: :created
