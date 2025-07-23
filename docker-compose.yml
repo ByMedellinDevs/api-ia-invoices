@@ -23,22 +23,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # Redis (for caching and background jobs)
-  redis:
-    image: redis:7-alpine
-    container_name: api_ia_invoices_redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-    networks:
-      - api_network
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
   # Rails API Application
   api:
     build:
@@ -49,7 +33,6 @@ services:
     environment:
       RAILS_ENV: development
       DATABASE_URL: postgresql://postgres:password@db:5432/api_ia_invoices_development
-      REDIS_URL: redis://redis:6379/0
       RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
       RAILS_LOG_TO_STDOUT: "1"
       RAILS_SERVE_STATIC_FILES: "true"
@@ -62,8 +45,6 @@ services:
       - "3000:3000"
     depends_on:
       db:
-        condition: service_healthy
-      redis:
         condition: service_healthy
     networks:
       - api_network
@@ -108,8 +89,6 @@ services:
 
 volumes:
   postgres_data:
-    driver: local
-  redis_data:
     driver: local
   bundle_cache:
     driver: local

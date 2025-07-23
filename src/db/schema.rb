@@ -10,25 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_23_205115) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_23_210000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
-
-  create_table "monetary_transactions", force: :cascade do |t|
-    t.datetime "transaction_date", null: false
-    t.string "sender_account_number", limit: 20, null: false
-    t.string "receiver_account_number", limit: 20, null: false
-    t.string "bank", null: false
-    t.string "reference", null: false
-    t.decimal "transaction_amount", precision: 15, scale: 2, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["bank"], name: "index_monetary_transactions_on_bank"
-    t.index ["receiver_account_number"], name: "index_monetary_transactions_on_receiver_account_number"
-    t.index ["reference"], name: "index_monetary_transactions_on_reference", unique: true
-    t.index ["sender_account_number"], name: "index_monetary_transactions_on_sender_account_number"
-    t.index ["transaction_date"], name: "index_monetary_transactions_on_transaction_date"
-  end
+  enable_extension "pgcrypto"
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.bigint "resource_owner_id", null: false
@@ -72,7 +57,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_23_205115) do
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "transaction_date", null: false
+    t.string "sender_account_number", limit: 20, null: false
+    t.string "receiver_account_number", limit: 20, null: false
+    t.string "bank", null: false
+    t.string "reference", null: false
+    t.decimal "transaction_amount", precision: 15, scale: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bank"], name: "index_transactions_on_bank"
+    t.index ["receiver_account_number"], name: "index_transactions_on_receiver_account_number"
+    t.index ["reference"], name: "index_transactions_on_reference", unique: true
+    t.index ["sender_account_number"], name: "index_transactions_on_sender_account_number"
+    t.index ["transaction_date"], name: "index_transactions_on_transaction_date"
+  end
+
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", null: false
     t.string "name", null: false
     t.string "password_digest", null: false

@@ -1,4 +1,5 @@
 class Transaction < ApplicationRecord
+  
   validates :transaction_date, presence: true
   validates :sender_account_number, presence: true, length: { in: 8..20 }
   validates :receiver_account_number, presence: true, length: { in: 8..20 }
