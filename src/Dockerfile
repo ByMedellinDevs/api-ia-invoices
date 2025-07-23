@@ -66,7 +66,7 @@ EXPOSE 3001
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Default command for development
-CMD ["./bin/rails", "server", "-b", "0.0.0.0"]
+CMD ["./bin/rails", "server", "-b", "0.0.0.0", "-p", "3001"]
 
 # Build stage for production
 FROM base AS build
@@ -128,4 +128,4 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start server via Thruster by default for production
 EXPOSE 3001
-CMD ["./bin/thrust", "./bin/rails", "server"]
+CMD ["./bin/thrust", "./bin/rails", "server", "-p", "3001"]
