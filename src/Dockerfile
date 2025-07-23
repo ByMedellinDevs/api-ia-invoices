@@ -60,7 +60,7 @@ RUN mkdir -p tmp/pids log storage && \
     chmod +x bin/setup
 
 # Expose port for development
-EXPOSE 3000
+EXPOSE 80
 
 # Entrypoint prepares the database
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
