@@ -42,7 +42,7 @@ services:
       - rails_cache:/rails/tmp/cache
       - rails_storage:/rails/storage
     ports:
-      - "3000:3000"
+      - "3001:3000"
     depends_on:
       db:
         condition: service_healthy
